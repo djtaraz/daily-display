@@ -117,8 +117,9 @@ function App() {
   React.useEffect(() => {
     const getNews = async () => {
       const response = await axios.get(
-        `https://newsapi.org/v2/top-headlines?sources=bloomberg&apiKey=${process.env.REACT_APP_NEWS_KEY}`
+        `https://gnews.io/api/v4/top-headlines?lang=en&token=${process.env.REACT_APP_NEWS_KEY}`
       );
+      console.log(response);
       const article1 = response.data.articles[0].title;
       const article2 = response.data.articles[1].title;
       const article3 = response.data.articles[2].title;
@@ -179,7 +180,7 @@ function App() {
               <p>Good Day Mr Kushner</p>
             )}
           </h2>
-          <ul style={{ fontSize: 22, marginTop: -20, listStyle: 'square' }}>
+          <ul style={{ fontSize: 20, marginTop: -20, listStyle: 'square' }}>
             <li style={{ marginTop: 5 }}>{articles.article1}</li>
             <li style={{ marginTop: 5 }}>{articles.article2}</li>
             <li style={{ marginTop: 5 }}>{articles.article3}</li>
