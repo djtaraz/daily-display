@@ -117,9 +117,8 @@ function App() {
   React.useEffect(() => {
     const getNews = async () => {
       const response = await axios.get(
-        `https://gnews.io/api/v4/top-headlines?lang=en&token=${process.env.REACT_APP_NEWS_KEY}`
+        `https://gnews.io/api/v4/top-headlines?lang=en&token=${process.env.REACT_APP_GNEWS_KEY}`
       );
-      console.log(response);
       const article1 = response.data.articles[0].title;
       const article2 = response.data.articles[1].title;
       const article3 = response.data.articles[2].title;
