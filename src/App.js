@@ -64,7 +64,7 @@ function App() {
   React.useEffect(() => {
     const getWeather = async () => {
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?lat=51.503997123761394&lon=-0.2010926482705607&appid=${process.env.REACT_APP_OPENWEATHER_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=51.503997123761394&lon=-0.2010926482705607&appid=${process.env.REACT_APP_OPENWEATHER_KEY}&units=metric`
       );
       const location = response.data.name;
       const temperature = response.data.main.temp;
