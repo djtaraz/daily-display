@@ -1,6 +1,12 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faDollarSign,
+  faRubleSign,
+  faPoundSign,
+} from '@fortawesome/free-solid-svg-icons';
 const ccxt = require('ccxt');
 
 function App() {
@@ -48,17 +54,18 @@ function App() {
     setDate(date);
     setTimeout(getDate, 1000);
   };
-
   React.useEffect(() => {
     getTime();
     getHours();
     getDate();
+    console.log(process.env.OPENWEATHER_KEY);
+    // eslint-disable-next-line
   }, [time]);
 
   React.useEffect(() => {
     const getWeather = async () => {
       const response = await axios.get(
-        'http://api.openweathermap.org/data/2.5/weather?lat=51.503997123761394&lon=-0.2010926482705607&appid=00d7999bc4292d35f071cd0dd83f4252&units=metric'
+        `http://api.openweathermap.org/data/2.5/weather?lat=51.503997123761394&lon=-0.2010926482705607&appid=${process.env.REACT_APP_OPENWEATHER_KEY}&units=metric`
       );
       const location = response.data.name;
       const temperature = response.data.main.temp;
@@ -111,7 +118,7 @@ function App() {
   React.useEffect(() => {
     const getNews = async () => {
       const response = await axios.get(
-        'https://newsapi.org/v2/top-headlines?sources=bloomberg&apiKey=1d9a7f0e91bf49eb8b4a463cfd4a1ac0'
+        `https://newsapi.org/v2/top-headlines?sources=bloomberg&apiKey=${process.env.REACT_APP_NEWS_KEY}`
       );
       const article1 = response.data.articles[0].title;
       const article2 = response.data.articles[1].title;
@@ -131,7 +138,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" id="App">
       <div className="left">
         <div className="topLeft">
           <span className="time">
@@ -155,7 +162,14 @@ function App() {
       </div>
       <div className="right">
         <div className="topRight">
-          <h2 style={{ fontSize: 30, marginLeft: 5, marginTop: -5 }}>
+          <h2
+            style={{
+              fontSize: 30,
+              marginLeft: 15,
+              marginTop: -5,
+              borderBottom: '#0b4f9a solid 2px',
+            }}
+          >
             {hours <= 12 ? (
               <p>Good Morning Mr Kushner</p>
             ) : hours >= 12 && hours < 18 ? (
@@ -166,21 +180,55 @@ function App() {
               <p>Good Day Mr Kushner</p>
             )}
           </h2>
-          <h3 style={{ fontSize: 25, marginLeft: 5, marginTop: -20 }}>
-            Top news for you this hour:
-          </h3>
-          <ul style={{ fontSize: 20, marginTop: -20, listStyle: 'square' }}>
+          <ul style={{ fontSize: 22, marginTop: -20, listStyle: 'square' }}>
             <li style={{ marginTop: 5 }}>{articles.article1}</li>
             <li style={{ marginTop: 5 }}>{articles.article2}</li>
             <li style={{ marginTop: 5 }}>{articles.article3}</li>
           </ul>
         </div>
         <div className="bottomRight">
-          <ul style={{ fontSize: 20, marginTop: -20, listStyle: 'square' }}>
-            <li>BTC/USDT: {fx.btc}</li>
-            <li>USD/RUB: {fx.rub}</li>
-            <li>GBP/USD: {fx.gbp}</li>
-          </ul>
+          <div style={{ fontSize: 25, marginTop: -33 }}>
+            <h4 style={{ paddingLeft: 20, paddingTop: 5 }}>
+              {
+                <FontAwesomeIcon
+                  style={{ color: '#FFD700' }}
+                  icon={faDollarSign}
+                />
+              }{' '}
+              1 ={' '}
+              {
+                <FontAwesomeIcon
+                  style={{ color: '#FFD700' }}
+                  icon={faRubleSign}
+                />
+              }{' '}
+              {fx.rub}
+            </h4>
+            <h4 style={{ paddingLeft: 20, marginTop: -12 }}>
+              {
+                <FontAwesomeIcon
+                  style={{ color: '#FFD700' }}
+                  icon={faPoundSign}
+                />
+              }{' '}
+              1 ={' '}
+              <FontAwesomeIcon
+                style={{ color: '#FFD700' }}
+                icon={faDollarSign}
+              />{' '}
+              {fx.gbp}
+            </h4>
+            <h4 style={{ paddingLeft: 20, marginTop: -12 }}>
+              {<i style={{ color: '#FFD700' }} className="fab fa-btc"></i>} 1 ={' '}
+              {
+                <FontAwesomeIcon
+                  style={{ color: '#FFD700' }}
+                  icon={faDollarSign}
+                />
+              }{' '}
+              {fx.btc}
+            </h4>
+          </div>
         </div>
       </div>
     </div>
@@ -188,52 +236,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <div>
-        {hours <= 12 ? (
-          <p>Good Morning Mr Kushner!</p>
-        ) : hours >= 12 && hours < 18 ? (
-          <p>Good Afternoon Mr Kushner!</p>
-        ) : hours >= 18 ? (
-          <p>Good Evening Mr Kushner!</p>
-        ) : (
-          <p>Good Day Mr Kushner!</p>
-        )}
-      </div>
-      <div>
-        <p>Today is {date}</p>
-      </div>
-      <div>
-        <p>The time is {time}</p>
-      </div>
-      <div>
-        Weather is:
-        <ul>
-          <li>Location: {weather.location}</li>
-          <li>Temperature: {weather.temperature}</li>
-          <li>Weather: {weather.weather}</li>
-          <li>
-            Icon:
-            {
-              <img
-                src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
-                alt="none"
-              />
-            }
-          </li>
-        </ul>
-      </div>
-      <div>
-        <ul>
-          <li>BTC/USDT: {fx.btc}</li>
-          <li>USD/RUB: {fx.rub}</li>
-          <li>GBP/USD: {fx.gbp}</li>
-        </ul>
-      </div>
-      <div>
-        <h3>{articles.article1}</h3>
-        <h3>{articles.article2}</h3>
-        <h3>{articles.article3}</h3>
-      </div> */
-}

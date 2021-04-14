@@ -17,6 +17,14 @@
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&family=Source+Serif+Pro&family=Zen+Dots&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/27ecf7e450.js"
+      crossorigin="anonymous"
+    ></script>
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -49,5 +57,15 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      document.addEventListener('dblclick', () => {
+        document
+          .getElementById('App')
+          .requestFullscreen()
+          .catch((e) => {
+            console.log(e);
+          });
+      });
+    </script>
   </body>
 </html>
