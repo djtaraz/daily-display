@@ -163,7 +163,7 @@ function App() {
         <div className="topRight">
           <h2
             style={{
-              fontSize: 30,
+              fontSize: 25,
               marginLeft: 15,
               marginTop: -5,
               borderBottom: '#0b4f9a solid 2px',
@@ -179,7 +179,7 @@ function App() {
               <p>Good Day Mr Kushner</p>
             )}
           </h2>
-          <ul style={{ fontSize: 20, marginTop: -20, listStyle: 'square' }}>
+          <ul style={{ fontSize: 18, marginTop: -20, listStyle: 'square' }}>
             <li style={{ marginTop: 5 }}>{articles.article1}</li>
             <li style={{ marginTop: 5 }}>{articles.article2}</li>
             <li style={{ marginTop: 5 }}>{articles.article3}</li>
