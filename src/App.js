@@ -58,7 +58,6 @@ function App() {
     getTime();
     getHours();
     getDate();
-    console.log(process.env.OPENWEATHER_KEY);
     // eslint-disable-next-line
   }, [time]);
 
